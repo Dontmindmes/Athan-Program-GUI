@@ -12,6 +12,7 @@ $ go get -u github.com/gojektech/heimdall/httpclient
 
 ### Setting up the binary
 Setup is the most important part, makesure all files are in their respected place/dir and begin the building of the binary
+*For Windows Builds*
 ```sh
 $ go build -ldflags "-s -w -H windowsgui"
 ```
@@ -34,7 +35,7 @@ $ go build -ldflags "-s -w -H windowsgui"
  - Add desktop notification option to alert of salat
  - Clean up code
  - Improve error handling
-
+ - Add install to startup option
 ## READ
 DO NOT SELL THIS IN ANY FORM, SERVICE, PRODUCT OR ANYTHING
 DO NOT USE FOR COMMERCIAL USSAGE

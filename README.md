@@ -5,3 +5,4 @@ A cross platform Athan Software/Program that can be ran on Windows OS &amp; Mac 
 
 
 ![Image of Program](https://i.imgur.com/cfRXh1J.png)
+![Image of Program](https://i.imgur.com/acBEJCl.png)

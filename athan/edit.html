@@ -1,1 +1,285 @@
-<!--- CODE WILL BE ADDED SOON -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+    <style>
+        
+*{
+        margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+       }
+
+       body{
+           display:flex;
+           align-items: center;
+           justify-content: center;
+
+
+       height: 100vh;
+       }
+.opening-hours-container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  
+}
+
+.right-col{
+  margin-left: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.card#smart-card[data-status="soon"] {
+  background: #34495e;
+  color:#fff;
+}
+
+.card#smart-card[data-status="open"]{
+  background: #1ef28f;
+  box-shadow: 0 12px 80px #88d6b8;
+  color:#121212;
+}
+
+.card#smart-card[data-status="close"]{
+  background: #f21e41;
+  box-shadow: 0 12px 80px #d68892;
+  color:#fff;
+}
+
+
+.card{
+  min-width: 320px;
+  
+  display: grid;
+  grid-template-columns:200px auto;
+  
+  padding: 20px;
+  border-radius:8px;
+  
+  font-family: 'circular Std Book', sans-serif;
+  font-size: 18px;
+  
+  color: #121212;
+  box-shadow:0 3px 30px rgba(189,196,214,.5);
+  
+  user-select:none;
+}
+.card#smart-card,.card#smart-card .content{
+  justify-content:center;
+}
+
+.card:not(:last-child){
+  margin-bottom: 10px;
+}
+
+.card svg {
+  height:15px;
+}
+
+.card .feather-calender {
+  margin-top: -3px;
+}
+
+.card .content {
+  display: flex;
+  align-items: center;
+}
+
+.card .content span{
+  margin-left:8px;
+}
+
+
+
+/*Material Input Design*/
+.nav{
+  height:10em;
+}
+.container{
+  width: 100%;;
+  margin: 0 auto; 
+  text-align: center;
+  display: -webkit-flex;
+  display:         flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+
+* {
+  box-sizing:border-box;
+ }
+
+/* form starting stylings ------------------------------- */
+.group 			  { 
+  position:relative; 
+  margin-bottom:3em; 
+}
+input 				{
+  font-size:18px;
+  padding:0.625em  0.625em 0.625em 0.3125em;
+  display:block;
+  width:18.75em;
+  border:none;
+  border-bottom:1px solid #757575;
+}
+input:focus {
+  outline:none;
+}
+
+/* LABEL ======================================= */
+label {
+  font-family:'Arial';
+  color:#999; 
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:0.3125em;
+  top:0.625em;
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label 		{
+  top:-10px;
+  left: 0px;
+  font-size:14px;
+  color:#5264AE;
+}
+
+/* BOTTOM BARS ================================= */
+.bar 	{
+  position:relative;
+  display:block;
+}
+
+.bar:before, .bar:after 	{
+  content:'';
+  height:2px; 
+  width:0;
+  bottom:1px; 
+  position:absolute;
+  background:#5264AE; 
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%; 
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;
+}
+
+
+    </style>
+    <div class="opening-hours-container">
+        <div class="left-col">
+            <form>
+            </br>
+              <div class="group">      
+                <input type="text" id="state" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>State</label>
+              </div>
+              <div class="group">      
+                <input type="text" id="city" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>City</label>
+              </div>
+              <div class="group">      
+                <input type="text" id="TimeZone" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>TimeZone</label>
+              </div>
+              <div class="group">      
+                <input type="text" id="MP3Path" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Path to MP3</label>
+              </div>
+            </form>
+
+            <div class="card" id="smart-card" data-status="soon" onclick="BackFunction()">
+              <div class="content">
+                  <i data-feather="save"></i>
+                  <span id="smart-status"> <p id="coming">Save</p> </span>
+              </div>
+          </div>
+        </div>
+        </div>
+    
+
+    </div>
+    
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    
+
+	<script>
+// This will wait for the astilectron namespace to be ready
+document.getElementById("city").innerHTML = "test";
+
+document.addEventListener('astilectron-ready', function() {
+    // This will listen to messages sent by GO
+    astilectron.onMessage(function(message) {
+        // Process message
+        if (message.includes("SetDataState:")){
+            var str = message.replace("SetDataState:", "");
+            document.getElementById('state').value = str;
+        }
+          if (message.includes("SetDataTimeZone:")){
+            var str = message.replace("SetDataTimeZone:", "");
+            document.getElementById('TimeZone').value = str;
+          }
+          if (message.includes("SetDataCity:")){
+            var str = message.replace("SetDataCity:", "");
+            document.getElementById('city').value = str;
+          }
+          if (message.includes("SetDataMP3:")){
+            var str = message.replace("SetDataMP3:", "");
+            document.getElementById('MP3Path').value = str;
+          }
+          if (message.includes("Restart:")){
+                    var str = message.replace("Restart:", "");
+                    document.getElementById("coming").innerHTML = "Please Restart App";
+          }
+    });
+})
+
+
+    function BackFunction() {
+      var state = document.getElementById('state').value
+       var city = document.getElementById('city').value
+       var TimeZone = document.getElementById('TimeZone').value
+       var MP3Path = document.getElementById('MP3Path').value
+
+      astilectron.sendMessage("back:"+city+":"+state+":"+TimeZone+":"+MP3Path, function(message) {});
+    }
+
+    </script>
+    
+    <script>
+        feather.replace()
+    </script>
+</body>
+</html>

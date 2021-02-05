@@ -1,1 +1,279 @@
-<!--- CODE WILL BE ADDED SOON -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+    <style>
+        
+*{
+        margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+       }
+
+       body{
+           display:flex;
+           align-items: center;
+           justify-content: center;
+
+
+       height: 100vh;
+       }
+.opening-hours-container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  
+}
+
+.right-col{
+  margin-left: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.card#smart-card[data-status="soon"] {
+  background: #34495e;
+  color:#fff;
+}
+
+.card#smart-card[data-status="open"]{
+  background: #1ef28f;
+  box-shadow: 0 12px 80px #88d6b8;
+  color:#121212;
+}
+
+.card#smart-card[data-status="close"]{
+  background: #f21e41;
+  box-shadow: 0 12px 80px #d68892;
+  color:#fff;
+}
+
+
+.card{
+  min-width: 320px;
+  
+  display: grid;
+  grid-template-columns:200px auto;
+  
+  padding: 20px;
+  border-radius:8px;
+  
+  font-family: 'circular Std Book', sans-serif;
+  font-size: 18px;
+  
+  color: #121212;
+  box-shadow:0 3px 30px rgba(189,196,214,.5);
+  
+  user-select:none;
+}
+.card#smart-card,.card#smart-card .content{
+  justify-content:center;
+}
+
+.card:not(:last-child){
+  margin-bottom: 10px;
+}
+
+.card svg {
+  height:15px;
+}
+
+.card .feather-calender {
+  margin-top: -3px;
+}
+
+.card .content {
+  display: flex;
+  align-items: center;
+}
+
+.card .content span{
+  margin-left:8px;
+}
+    </style>
+    <div class="opening-hours-container">
+        <div class="left-col">
+            <div class="card">
+              
+                <div class="content">
+                <span> Fajir </span> 
+                </div>
+              
+                <div class="content">
+                  <i data-feather="clock"></i>
+                  <span> 	<p id="fajir"></p></span>
+              </div>
+              
+            </div>
+    
+            <div class="card">
+              
+                <div class="content">
+                <span> Duhur </span> 
+                </div>
+              
+                <div class="content">
+                  <i data-feather="clock"></i>
+                  <span> 	<p id="duhur"></p></span>
+              </div>
+              
+            </div>
+
+            <div class="card">
+              
+                <div class="content">
+                <span> Asr </span> 
+                </div>
+              
+                <div class="content">
+                  <i data-feather="clock"></i>
+                  <span> 	<p id="asr"></p></span>
+              </div>
+              
+            </div>
+
+            <div class="card">
+              
+                <div class="content">
+                <span> Magrib </span> 
+                </div>
+              
+                <div class="content">
+                  <i data-feather="clock"></i>
+                  <span> 	<p id="magrib"></p></span>
+              </div>
+              
+            </div>
+
+            <div class="card">
+              
+                <div class="content">
+                <span> Isha </span> 
+                </div>
+              
+                <div class="content">
+                  <i data-feather="clock"></i>
+                  <span> 	<p id="isha"></p></span>
+              </div>
+              
+            </div>
+            <div class="card" id="smart-card" data-status="soon" onclick="EditFunction()">
+              <div class="content"> 
+                  <span id="smart-status"> <p id="coming">Waiting For Salat</p> </span>
+              </div>
+          </div>
+     
+        </div>
+    
+
+    </div>
+    
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    
+
+	<script>
+    function EditFunction() {
+      astilectron.sendMessage("edit", function(message) {
+        //send back
+    });
+    }
+
+        document.addEventListener('astilectron-ready', function() {
+        	// This will listen to messages sent by GO
+        	astilectron.onMessage(function(message) {
+                // Process Prayer Times
+                if (message.includes("fajir:")){
+                    var str = message.replace("fajir:", "");
+                    document.getElementById("fajir").innerHTML = str;
+                }
+
+                if (message.includes("duhur:")){
+                    var str = message.replace("duhur:", "");
+                    document.getElementById("duhur").innerHTML = str;
+                }
+
+                if (message.includes("asr:")){
+                    var str = message.replace("asr:", "");
+                    document.getElementById("asr").innerHTML = str;
+                }
+
+                if (message.includes("magrib:")){
+                    var str = message.replace("magrib:", "");
+                    document.getElementById("magrib").innerHTML = str;
+                }
+
+                if (message.includes("isha:")){
+                    var str = message.replace("isha:", "");
+                    document.getElementById("isha").innerHTML = str;
+                }
+
+                // Process Now Prayer Times
+                if (message.includes("Nowfajir:")){
+                    var str = message.replace("Nowfajir:", "");
+                    document.getElementById("coming").innerHTML = "Now Fajir Prayer";
+                }
+
+                if (message.includes("Nowduhur:")){
+                    var str = message.replace("Nowduhur:", "");
+                    document.getElementById("coming").innerHTML = "Now Duhur Prayer";
+                }
+
+                if (message.includes("Nowasr:")){
+                    var str = message.replace("Nowasr:", "");
+                    document.getElementById("coming").innerHTML = "Now Asr Prayer";
+                }
+
+                if (message.includes("Nowmagrib:")){
+                    var str = message.replace("Nowmagrib:", "");
+                    document.getElementById("coming").innerHTML = "Now Magrib Prayer";
+                }
+
+                if (message.includes("Nowisha:")){
+                    var str = message.replace("Nowisha:", "");
+                    document.getElementById("coming").innerHTML = "Now Isha Prayer";
+                }
+
+                // Process UP Prayer Times
+                if (message.includes("Upfajir:")){
+                    var str = message.replace("Upfajir:", "");
+                    document.getElementById("coming").innerHTML = "Up coming: Fajir";
+                }
+
+                if (message.includes("Upduhur:")){
+                    var str = message.replace("Upduhur:", "");
+                    document.getElementById("coming").innerHTML = "Up coming: Duhur";
+                }
+
+                if (message.includes("Upwasr:")){
+                    var str = message.replace("Upwasr:", "");
+                    document.getElementById("coming").innerHTML = "Up coming: Asr";
+                }
+
+                if (message.includes("Upmagrib:")){
+                    var str = message.replace("Upwmagrib:", "");
+                    document.getElementById("coming").innerHTML = "Up coming: Magrib";
+                }
+
+                if (message.includes("Upisha:")){
+                    var str = message.replace("Upwisha:", "");
+                    document.getElementById("coming").innerHTML = "Up coming: Isha";
+                }
+                if (message.includes("Restart:")){
+                    var str = message.replace("Restart:", "");
+                    document.getElementById("coming").innerHTML = "Please Restart App";
+                }
+        	});
+        })
+    </script>
+    
+    <script>
+        feather.replace()
+    </script>
+</body>
+</html>

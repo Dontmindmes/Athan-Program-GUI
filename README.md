@@ -3,5 +3,5 @@ A cross platform Athan Software/Program that can be ran on Windows OS &amp; Mac 
 
 *Software may not be used for commercial of for use to make money*
 
-[Pictures]
+
 ![Image of Program](https://i.imgur.com/cfRXh1J.png)
